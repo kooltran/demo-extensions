@@ -1,27 +1,43 @@
 .giphy {
   &-app {
-    color: red;
+    width: 600px;
   }
 
   &-search {
-    position: relative;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     overflow: hidden;
-    border-radius: 34px;
-    margin-bottom: 5px;
     color: #fff;
+    background: #333;
 
     .search-box {
       height: 100%;
       border: 0;
       display: block;
-      width: 100%;
+      width: 512px;
+      border-radius: 34px;
       padding: 10px 22px 10px 50px;
+      margin: 10px;
       font-size: 18px;
-      height: 50px;
+      height: 40px;
       color: #fff;
-      background: linear-gradient(to right, #2c6dd5 0%, #2c6dd5 28%, #ff4b5a 91%, #ff4b5a 100%);
-      font-family: 'Lato', sans-serif;
+      background: linear-gradient(
+        to right,
+        #2c6dd5 0%,
+        #2c6dd5 28%,
+        #ff4b5a 91%,
+        #ff4b5a 100%
+      );
+      font-family: "Lato", sans-serif;
+
+      &::placeholder {
+        color: #fff;
+      }
     }
 
     .search-icon {
@@ -36,8 +52,114 @@
     }
 
     .search-img {
-      width: 34px;
-      height: 34px;
+      width: 30px;
+      height: 30px;
     }
   }
+
+  &-content {
+    column-count: 3;
+    column-gap: 1em;
+    background: rgb(18, 18, 18);
+    padding: 8px;
+    margin-top: 80px;
+
+    &.notfound {
+      display: flex;
+      justify-content: center;
+    }
+
+    .content-item {
+      background-color: #eee;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      margin: 0 0 1em;
+      width: 100%;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+      }
+
+      .icon-link {
+        position: absolute;
+        top: 0;
+        right: -30px;
+        display: inline-block;
+        background-image: url("./assets/icon-animations.svg");
+        width: 30px;
+        height: 30px;
+        background-position: 0 -255px;
+        transition: right 0.1s linear;
+        cursor: pointer;
+
+        &:hover {
+          animation: blinking 0.5s steps(4) infinite alternate;
+        }
+      }
+
+      &:hover {
+        .icon-link {
+          right: 0;
+        }
+      }
+    }
+  }
+
+  &-notfound {
+    display: flex;
+    align-items: center;
+    height: 500px;
+
+    img {
+      height: 100%;
+    }
+
+    .notfound-text {
+      color: #fff;
+      font-family: "Lucida Console", Monaco, monospace;
+    }
+  }
+}
+
+.toaster {
+  position: fixed;
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  background: #16a085;
+  z-index: 10;
+  text-align: center;
+  color: #fff;
+  animation: toasted 4s forwards;
+}
+
+@keyframes toasted {
+  0% {
+    top: -100%;
+  }
+  20% {
+    top: 0;
+  }
+  80% {
+    top: 0;
+  }
+  100% {
+    top: -100%;
+  }
+}
+
+@keyframes blinking {
+  from {
+    background-position: 0 -255px;
+  }
+  to {
+    background-position: -145px -255px;
+  }
+}
+
+body {
+  width: 600px;
+  box-sizing: border-box;
 }
